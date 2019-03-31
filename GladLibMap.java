@@ -34,9 +34,15 @@ public class GladLibMap {
 	            
                 for(String s : Categories)
                 {
-                    map 
+                    if(!map.containsKey(s))
+                   {
+                    ArrayList<String> category= new ArrayList<String>();
+                    category=readIt(source+s+".txt");
+                    map.put(s,category);
+                   }
+                   
                 }
-		//List=readIt(source+"/fruit.txt");
+		
 		usedWordList=new ArrayList<String>();
 	}
 	
@@ -46,37 +52,12 @@ public class GladLibMap {
 	}
 	
 	private String getSubstitute(String label) {
-		if (label.equals("country")) {
-			return randomFrom(countryList);
-		}
-		if (label.equals("color")){
-			return randomFrom(colorList);
-		}
-		if (label.equals("noun")){
-			return randomFrom(nounList);
-		}
-		if (label.equals("name")){
-			return randomFrom(nameList);
-		}
-		if (label.equals("adjective")){
-			return randomFrom(adjectiveList);
-		}
-		if (label.equals("animal")){
-			return randomFrom(animalList);
-		}
-		if (label.equals("verb")){
-			return randomFrom(verbList);
-		}
-		if (label.equals("timeframe")){
-			return randomFrom(timeList);
-		}
+		
 		if (label.equals("number")){
 			return ""+myRandom.nextInt(50)+5;
 		}
-		if (label.equals("fruit")){
-			return randomFrom(fruitList);
-		}
-		return "**UNKNOWN**";
+		
+		return randomFrom(map.get(label));
 	}
 	
 	private String processWord(String w){
